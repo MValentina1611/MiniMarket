@@ -1,8 +1,8 @@
 package ui;
 
-import java.io.IOException;
 import java.util.Scanner;
 
+import exceptions.WrongDayException;
 import exceptions.YoungerPersonException;
 import model.MiniMarket;
 
@@ -66,7 +66,7 @@ public class MiniMarketSystem {
 				break;
 	
 			case 2:
-				System.out.println("Number of people");
+				ShowNumberOfPeople();
 				break;
 		
 			default:
@@ -76,20 +76,40 @@ public class MiniMarketSystem {
 		
 	}//Method ends
 	
-	public void askForInfo()
+	public void askForInfo() 
 	{
 		String typeOfId = "";
 		String id = "";
+		
 		System.out.println("Enter the type of Id");
 		typeOfId = reader.nextLine();
-		try {
+		
+		System.out.println("Enter the id");
+		id = reader.nextLine();
+		
+		try { 
 			miniMarket.registerPeople(typeOfId, id);
-		}catch(YoungerPersonException ype){
-			 System.err.println(ype.getMessage());
+			System.out.println("¡Welcome, come in!");
+		}
+		catch(YoungerPersonException ype )
+		{
+			System.err.println(ype.getMessage());
+			if( miniMarket.verifyDay(id) == false )
+			{
+				WrongDayException wde = new WrongDayException(id);
+				System.err.println(wde.getMessage());
+			}
+		}
+		catch( WrongDayException wde )
+		{
+			System.err.println(wde.getMessage());
 		}
 		
-		
-		
-		//System.out.println("Enter the Id");	
+	}
+	
+	
+	public void ShowNumberOfPeople()
+	{
+		System.out.println("The number of people who have tried to enter is: " +miniMarket.getCounter());
 	}
 }

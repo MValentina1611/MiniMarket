@@ -6,10 +6,10 @@ public class Person {
 	private TypeOfId typeOfId;
 	private String id;
 	
-	public Person(String typeOfId, String id)
+	public Person(TypeOfId typeOfId, String id)
 	{
 		this.id = id;
-		this.typeOfId = TypeOfId.valueOf(typeOfId);
+		this.typeOfId = typeOfId;
 	}
 
 	public String getTypeOfId() {

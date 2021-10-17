@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import exceptions.WrongDayException;
 import exceptions.YoungerPersonException;
 
 public class MiniMarket {
@@ -19,26 +21,60 @@ public class MiniMarket {
 		return counter;
 	}
 	
-	public void registerPeople(String typeOfId, String id) throws YoungerPersonException
+	public void registerPeople(String typeOfId, String id) throws YoungerPersonException, WrongDayException
 	{
-		
-		if( typeOfId.equalsIgnoreCase(TypeOfId.TI.name()))
+		counter++;
+		if( typeOfId.equalsIgnoreCase("ti"))
 		{
 			throw new YoungerPersonException(typeOfId);
 		}
-		//else
-		//
-			//if( LocalDate.now().getDayOfMonth() == )
-			//{
-				
-			//}
+		else
+		{
+			if( verifyDay(id) == false )
+			{
+				throw new WrongDayException(id);
+			}
 			else
 			{	
-				Person newPerson = new Person( typeOfId, id);
+				Person newPerson = new Person(TypeOfId.valueOf(typeOfId.toUpperCase()), id);
 				people.add(newPerson);
 			}
-		//}
-		counter++;
+		}
+		
+	}
+	
+	public boolean verifyDay(String id)
+	{
+		int today = LocalDate.now().getDayOfMonth();
+		//System.out.println(today);
+		int penultimate = Character.getNumericValue(id.charAt(id.length()-2));
+		//System.out.println(penultimate);
+		boolean canGoOut = false;
+		
+		if( penultimate % 2 == 0 )
+		{
+			if( today % 2 ==  0 )
+			{
+				canGoOut = false;
+			}
+			else if( today % 2 != 0 )
+			{
+				canGoOut = true;
+			}
+		}
+		else if( penultimate % 2 != 0 )
+		{
+			if( today % 2 == 0)
+			{
+				canGoOut = true;
+			}
+			else if( today % 2 != 0 )
+			{
+				canGoOut = false;
+				
+			}
+		}
+		return canGoOut;
 	}
 	
 }
