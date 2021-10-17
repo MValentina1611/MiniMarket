@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import exceptions.WrongDayException;
@@ -20,8 +19,18 @@ public class MiniMarket {
 	public int getCounter() {
 		return counter;
 	}
+
 	
-	public void registerPeople(String typeOfId, String id) throws YoungerPersonException, WrongDayException
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	
+	public ArrayList<Person> getPeople() {
+		return people;
+	}
+
+	public void registerPeople(String typeOfId, String id, int today) throws YoungerPersonException, WrongDayException
 	{
 		counter++;
 		if( typeOfId.equalsIgnoreCase("ti"))
@@ -30,7 +39,7 @@ public class MiniMarket {
 		}
 		else
 		{
-			if( verifyDay(id) == false )
+			if( verifyDay(id,today) == false )
 			{
 				throw new WrongDayException(id);
 			}
@@ -43,12 +52,12 @@ public class MiniMarket {
 		
 	}
 	
-	public boolean verifyDay(String id)
+	public boolean verifyDay(String id, int today)
 	{
-		int today = LocalDate.now().getDayOfMonth();
-		//System.out.println(today);
+		//int today = LocalDate.now().getDayOfMonth();
+		
 		int penultimate = Character.getNumericValue(id.charAt(id.length()-2));
-		//System.out.println(penultimate);
+		
 		boolean canGoOut = false;
 		
 		if( penultimate % 2 == 0 )

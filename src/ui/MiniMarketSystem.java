@@ -1,5 +1,6 @@
 package ui;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import exceptions.WrongDayException;
@@ -80,7 +81,7 @@ public class MiniMarketSystem {
 	{
 		String typeOfId = "";
 		String id = "";
-		
+		int today = LocalDate.now().getDayOfMonth();
 		System.out.println("Enter the type of Id");
 		typeOfId = reader.nextLine();
 		
@@ -88,13 +89,13 @@ public class MiniMarketSystem {
 		id = reader.nextLine();
 		
 		try { 
-			miniMarket.registerPeople(typeOfId, id);
+			miniMarket.registerPeople(typeOfId, id, today);
 			System.out.println("¡Welcome, come in!");
 		}
 		catch(YoungerPersonException ype )
 		{
 			System.err.println(ype.getMessage());
-			if( miniMarket.verifyDay(id) == false )
+			if( miniMarket.verifyDay(id, today) == false )
 			{
 				WrongDayException wde = new WrongDayException(id);
 				System.err.println(wde.getMessage());
