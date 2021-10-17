@@ -67,7 +67,7 @@ public class MiniMarketSystem {
 				break;
 	
 			case 2:
-				ShowNumberOfPeople();
+				showNumberOfPeople();
 				break;
 		
 			default:
@@ -109,7 +109,7 @@ public class MiniMarketSystem {
 	}
 	
 	
-	public void ShowNumberOfPeople()
+	public void showNumberOfPeople()
 	{
 		System.out.println("The number of people who have tried to enter is: " +miniMarket.getCounter());
 	}
