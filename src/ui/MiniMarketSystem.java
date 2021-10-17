@@ -3,6 +3,7 @@ package ui;
 import java.io.IOException;
 import java.util.Scanner;
 
+import exceptions.YoungerPersonException;
 import model.MiniMarket;
 
 public class MiniMarketSystem {
@@ -61,7 +62,7 @@ public class MiniMarketSystem {
 				System.out.println ("BYE :*");
 				break;
 			case 1:
-				System.out.println("Register a person");
+				askForInfo();
 				break;
 	
 			case 2:
@@ -75,4 +76,20 @@ public class MiniMarketSystem {
 		
 	}//Method ends
 	
+	public void askForInfo()
+	{
+		String typeOfId = "";
+		String id = "";
+		System.out.println("Enter the type of Id");
+		typeOfId = reader.nextLine();
+		try {
+			miniMarket.registerPeople(typeOfId, id);
+		}catch(YoungerPersonException ype){
+			 System.err.println(ype.getMessage());
+		}
+		
+		
+		
+		//System.out.println("Enter the Id");	
+	}
 }
