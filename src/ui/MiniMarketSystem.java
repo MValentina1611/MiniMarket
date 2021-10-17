@@ -48,8 +48,7 @@ public class MiniMarketSystem {
 			"(0) Exit";
 		
 		System.out.println(menu);
-		menuOp = reader.nextInt();
-		reader.nextLine();
+		menuOp = Integer.parseInt(reader.nextLine());
 		return menuOp;
 
 	}//Method ends
@@ -60,7 +59,7 @@ public class MiniMarketSystem {
 		{
 
 			case 0:
-				System.out.println ("BYE :*");
+				System.out.println ("BYE XOXO");
 				break;
 			case 1:
 				askForInfo();
@@ -94,11 +93,16 @@ public class MiniMarketSystem {
 		}
 		catch(YoungerPersonException ype )
 		{
-			System.err.println(ype.getMessage());
+			
 			if( miniMarket.verifyDay(id, today) == false )
 			{
+				
 				WrongDayException wde = new WrongDayException(id);
-				System.err.println(wde.getMessage());
+				System.err.println(wde.getMessage() +"\n"+ ype.getMessage());
+			}
+			else
+			{
+				System.err.println(ype.getMessage());
 			}
 		}
 		catch( WrongDayException wde )

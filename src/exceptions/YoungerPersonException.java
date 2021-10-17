@@ -11,7 +11,7 @@ public class YoungerPersonException extends Exception{
 	private String typeOfId; 
 	public YoungerPersonException(String typeOfId)
 	{
-		super("The person is of legal age ");	
+		super("The person is off legal age ");	
 		this.typeOfId = typeOfId;
 	}
 	public String getTypeOfId() {
